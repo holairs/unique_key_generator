@@ -1,14 +1,14 @@
-use controllers::generate_values::cadenas_id;
-use controllers::storage::agregar_linea_al_archivo;
+use controllers::generate_values::key_id;
+use controllers::storage::add_key_to_file;
 
 mod controllers;
 
-const RUTA_ARCHIVO: &str = "./keys_rust.txt";
+const FILE_PATH: &str = "./generated_keys.txt";
 
 fn main() {
-    let resultado = cadenas_id();
-    println!("Generated Key: {}", resultado);
+    let result = key_id();
+    println!("Generated Key: {}", result);
 
     // Store generated key on a txt file
-    agregar_linea_al_archivo(RUTA_ARCHIVO, &resultado);
+    add_key_to_file(FILE_PATH, &result);
 }
