@@ -15,7 +15,7 @@ impl Menu {
             println!("\n0========= Menu =========0");
             println!("1. Generate a new key");
             println!("2. Validate a existin key");
-            println!("3. Exit");
+            println!("0. Exit");
             println!("0========================0");
 
             // Get user option
@@ -44,10 +44,8 @@ impl Menu {
     fn generate_key(&self) {
         let generator = KeyGenerator::new();
         let result = generator.key_id();
-        println!("Generated Key: {}", result);
-
         FileManager::add_key_to_file(FILE_PATH, &result);
-        println!("Key has been stored in '{}'.", FILE_PATH);
+        println!("Generated Key [ {} ] and stored in [ {} ]", result, FILE_PATH);
     }
 
     // Generate and store a new key
