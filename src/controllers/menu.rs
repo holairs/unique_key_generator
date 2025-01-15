@@ -1,4 +1,4 @@
-use crate::controllers::{FileManager, KeyGenerator};
+use crate::controllers::{FileManager, KeyGenerator, KeyValidator};
 
 pub struct Menu;
 
@@ -12,15 +12,17 @@ impl Menu {
     // Starts menu
     pub fn menu_section(&self) {
         loop {
-            println!("\n=== Menu ===");
+            println!("\n0========= Menu =========0");
             println!("1. Generate a new key");
-            println!("2. Exit");
-            print!("Select an option: ");
+            println!("2. Validate a existin key");
+            println!("3. Exit");
+            println!("0========================0");
 
             // Get user option
             match Self::get_user_input().trim().parse::<i8>() {
                 Ok(1) => self.generate_key(),
-                Ok(2) => {
+                Ok(2) => self.validate_key(),
+                Ok(0) => {
                     println!("Exiting program. Goodbye!");
                     break;
                 }
@@ -46,5 +48,19 @@ impl Menu {
 
         FileManager::add_key_to_file(FILE_PATH, &result);
         println!("Key has been stored in '{}'.", FILE_PATH);
+    }
+
+    // Generate and store a new key
+    fn validate_key(&self) {
+        print!("Enter the key to validate: ");
+        let key = Self::get_user_input();
+
+        if KeyValidator::is_key_valid(FILE_PATH, &key) {
+            println!("");
+            println!("Key '{}' is valid and exists in the file.", key.trim());
+        } else {
+            println!("");
+            println!("Key '{}' is not valid or does not exist.", key.trim());
+        }
     }
 }
