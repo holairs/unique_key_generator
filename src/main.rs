@@ -1,14 +1,17 @@
-use controllers::generate_values::key_id;
-use controllers::storage::add_key_to_file;
-
 mod controllers;
+
+use controllers::{FileManager, KeyGenerator};
 
 const FILE_PATH: &str = "./generated_keys.txt";
 
 fn main() {
-    let result = key_id();
+    // Create a new KeyGenerator
+    let generator = KeyGenerator::new();
+
+    // Generate a new key
+    let result = generator.key_id();
     println!("Generated Key: {}", result);
 
-    // Store generated key on a txt file
-    add_key_to_file(FILE_PATH, &result);
+    // Store the key on the file
+    FileManager::add_key_to_file(FILE_PATH, &result);
 }

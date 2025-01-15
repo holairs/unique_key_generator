@@ -1,5 +1,5 @@
 [package]
-name = "manual_crypt"
+name = "unique_key_generator"
 version = "0.1.0"
 edition = "2021"
 
